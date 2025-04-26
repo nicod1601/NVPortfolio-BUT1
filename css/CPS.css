@@ -634,52 +634,67 @@ footer {
     position: relative;
   }
   
-  .dropdown-content {
+  /* Ajoutez du padding à la dropdown-content pour créer une zone de "sécurité" */
+.dropdown-content {
     position: absolute;
-    top: calc(100% + 10px);
+    top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: white;
+    transform: translateX(-50%);
+    background: rgba(19, 19, 19, 0.95);
+    backdrop-filter: blur(10px);
     min-width: 200px;
     border-radius: 12px;
-    box-shadow: var(--shadow-md);
+    padding-top: 10px; /* Ajouter du padding en haut */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     overflow: hidden;
     z-index: 100;
-  }
-  
-  .dropdown-content::before {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Supprimer la transformation Y pour simplifier l'interaction */
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%);
+}
+
+/* Corriger les styles des liens dans le dropdown */
+.dropdown-content a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+}
+
+/* Ajout d'un délai sur le dropdown */
+.dropdown .dropdown-content {
+    transition-delay: 0s;
+}
+
+.dropdown:hover .dropdown-content {
+    transition-delay: 0.1s;
+}
+
+/* Correction du pseudo-élément */
+.dropdown-content::before {
     content: '';
     position: absolute;
     top: -8px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) rotate(45deg);
     width: 16px;
     height: 16px;
-    background: white;
-    transform: translateX(-50%) rotate(45deg);
-  }
-  
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-  }
-  
-  .dropdown-content a {
-    display: block;
-    padding: 0.8rem 1.2rem;
-    border-bottom: 1px solid var(--gray-light);
-    transition: var(--transition);
-  }
-  
-  .dropdown-content a:hover {
-    background: var(--gray-light);
-    transform: translateX(5px);
-  }
-  
-  .dropdown-content a::after {
-    display: none;
-  }
+    background: rgba(19, 19, 19, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
