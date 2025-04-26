@@ -300,46 +300,29 @@ body {
     margin: 0 auto;
 }
 
+/* Styles pour la section compétences */
 .competences-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     position: relative;
     z-index: 2;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 .competence-card {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.competence-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--gradient);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease;
-}
-
-.competence-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.competence-card:hover::before {
-    transform: scaleX(1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .competence-icon {
@@ -355,25 +338,33 @@ body {
 }
 
 .competence-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: white;
+    /* Hauteur fixe pour le titre pour garantir l'alignement */
+    min-height: 3.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .competence-card p {
     color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.7;
+    /* Hauteur fixe pour la description */
+    min-height: 7rem;
+    flex-grow: 1;
 }
 
 .status-bar {
     background: rgba(255, 255, 255, 0.1);
     height: 8px;
     border-radius: 4px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .status-progress {
@@ -386,29 +377,18 @@ body {
     transition: width 1s ease;
 }
 
-.status-acquise {
-    width: 100%;
-}
-
-.status-en-cours {
-    width: 60%;
-}
-
-.status-non-acquise {
-    width: 25%;
-}
-
 .status-text {
     display: flex;
     justify-content: space-between;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .competence-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    margin-top: auto;
 }
 
 .link-btn {
@@ -418,20 +398,28 @@ body {
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
+    padding: 0.5rem 0;
 }
 
-.link-btn:hover {
-    color: var(--secondary);
+/* Responsive design pour les fiches de compétences */
+@media (max-width: 1100px) {
+    .competences-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.link-btn::after {
-    content: '→';
-    margin-left: 5px;
-    transition: transform 0.3s ease;
-}
-
-.link-btn:hover::after {
-    transform: translateX(5px);
+@media (max-width: 700px) {
+    .competences-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .competence-card h3 {
+        min-height: auto;
+    }
+    
+    .competence-card p {
+        min-height: auto;
+    }
 }
 
 /* FOOTER */
