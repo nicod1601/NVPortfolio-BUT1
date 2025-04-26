@@ -3,140 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Portfolio BUT Informatique</title>
-    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
-        <div class="header-content">
-            <h1>Portfolio BUT Informatique</h1>
-            <p>IUT du Havre</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mon Portfolio</h1>
+            <p>BUT Informatique - Développeur passionné</p>
         </div>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="./index.html"               >Présentation</a></li>
-            <li><a href="./Competences/C1/index.html">Compétence 1</a></li>
-            <li><a href="./Competences/C2/index.html">Compétence 2</a></li>
-            <li><a href="./Competences/C3/index.html">Compétence 3</a></li>
-            <li><a href="./Competences/C4/index.html">Compétence 4</a></li>
-            <li><a href="./Competences/C5/index.html">Compétence 5</a></li>
-            <li><a href="./Competences/C6/index.html">Compétence 6</a></li>
-        </ul>
-    </nav>
-    
-    <div class="container">
-        <section id="about">
-            <div class="profile">
-                <img src="./img/photo-profile.jpg" alt="Votre photo" class="profile-image">
-                <div>
-                    <h2>À propos de moi</h2>
-                    <p> <b>Nom    : </b>Delpech </p>
-                    <p> <b>Prenom : </b>Nicolas </p>
-                    <p> <b>Annee :  </b>BUT1    </p>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-image-container animate">
+                    <div class="profile-image">
+                        <div>👨‍💻</div>
+                    </div>
+                    <div class="glowing-border"></div>
                 </div>
-            </div>
-        </section>
-        
-        <section id="formation">
-            <h2>Formation</h2>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>BUT Informatique</h3>
-                        <p>2025 - BUT1 Redoublement</p>
-                        <p>BUT Informatique Département du Havre</p>
+                
+                <div class="profile-details animate">
+                    <h2>Delpech Nicolas</h2>
+                    <h3>Étudiant en BUT Informatique</h3>
+                    <p>
+                        Passionné par le développement logiciel et les nouvelles technologies, je suis actuellement 
+                        en formation BUT Informatique où j'acquiers des compétences techniques solides et une
+                        vision globale du domaine informatique. Mon parcours combine des projets concrets, 
+                        des connaissances théoriques approfondies et une approche créative de la résolution de problèmes.
+                    </p>
+                    <div class="profile-actions">
+                        <a href="#" class="btn btn-primary">Télécharger mon CV</a>
+                        <a href="#" class="btn btn-outline">Me contacter</a>
                     </div>
                 </div>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h3>BUT Informatique</h3>
-                        <p>2024 - BUT1</p>
-                        <p>BUT Informatique Département du Havre</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="competences-section">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>Mes Compétences</h2>
+                <p>Découvrez les compétences que j'ai développées au cours de ma formation en BUT Informatique</p>
+            </div>
+            
+            <div class="competences-grid">
+                <div class="competence-card animate">
+                    <div class="competence-icon">💻</div>
+                    <h3>Développement d'application</h3>
+                    <p>
+                        Conception et implémentation d'applications informatiques en utilisant les langages
+                        et frameworks adaptés. Expertise en Java, Python et React.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-acquise"></div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h3>Baccalauréat</h3>
-                        <p>2023</p>
-                        <p>Lycée Maupassant Fécamps</p>
-                        <p>Spécialités : STI2D SIN</p>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>Acquise</span>
                     </div>
-                </div>
-                <!-- Vous pouvez ajouter d'autres éléments au timeline -->
-            </div>
-        </section>
-        
-        <section id="competences">
-            <h2>Compétences</h2>
-            
-            <h3>Langages de programmation</h3>
-            <div class="skills">
-                <div class="skill-tag">Java</div>
-                <div class="skill-tag">C</div>
-                <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">SQL</div>
-            </div>
-            
-            <h3>Développement Web</h3>
-            <div class="skills">
-                <div class="skill-tag">HTML</div>
-                <div class="skill-tag">CSS</div>
-                <div class="skill-tag">Node.js</div>
-            </div>
-            
-            <h3>Bases de données</h3>
-            <div class="skills">
-                <div class="skill-tag">PostgreSQL</div>
-            </div>
-            
-            <h3>Outils et méthodes</h3>
-            <div class="skills">
-                <div class="skill-tag">Git</div>
-                <div class="skill-tag">Docker</div>
-                <div class="skill-tag">Linux</div>
-            </div>
-        </section>
-        
-        <section id="projets">
-            <h2>Projets Personnels</h2>
-            <div class="projects">
-                <div class="project-card">
-                    <img src="./img/logoAppli.png" alt="Projet 1" class="project-image">
-                    <div class="project-content">
-                        <h3>Projet 1</h3>
-                        <p>Application Helldivers qui permet de donner des informations sur le jeu Helldivers</p>
-                        <div class="project-tags">
-                            <span class="project-tag">C1</span>
-                            <span class="project-tag">C2</span>
-                            <span class="project-tag">C5</span>
-                            <span class="project-tag">C6</span>
-                        </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="./Competences/C1/index.html" class="link-btn">Détails</a>
                     </div>
                 </div>
                 
-        </section>
-       
-        <!--
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>N'hésitez pas à me contacter pour discuter de projets, d'opportunités de stage ou pour toute autre information.</p>
-            <p>📧 Email : votre.email@exemple.com</p>
-            <p>📱 Téléphone : +33 6 XX XX XX XX</p>
-            
-            <div class="social-links">
-                <a href="#" target="_blank">LinkedIn</a>
-                <a href="#" target="_blank">GitHub</a>
-                <a href="#" target="_blank">Twitter</a>
+                <div class="competence-card animate">
+                    <div class="competence-icon">⚡</div>
+                    <h3>Optimisation d'applications</h3>
+                    <p>
+                        Amélioration des performances et de la qualité des applications existantes
+                        par des techniques d'optimisation et de refactoring avancées.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-en-cours"></div>
+                    </div>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>En cours</span>
+                    </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="#" class="link-btn">Détails</a>
+                    </div>
+                </div>
+                
+                <div class="competence-card animate">
+                    <div class="competence-icon">🔧</div>
+                    <h3>Administration de systèmes</h3>
+                    <p>
+                        Installation, configuration et maintenance des systèmes informatiques
+                        et des infrastructures réseau. Gestion de serveurs Linux et Windows.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-acquise"></div>
+                    </div>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>Acquise</span>
+                    </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="#" class="link-btn">Détails</a>
+                    </div>
+                </div>
+                
+                <div class="competence-card animate">
+                    <div class="competence-icon">🗄️</div>
+                    <h3>Gestion de données</h3>
+                    <p>
+                        Conception, administration et utilisation de bases de données pour stocker,
+                        organiser et exploiter des informations. SQL, NoSQL et Data Mining.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-non-acquise"></div>
+                    </div>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>Non acquise</span>
+                    </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="#" class="link-btn">Détails</a>
+                    </div>
+                </div>
+                
+                <div class="competence-card animate">
+                    <div class="competence-icon">📊</div>
+                    <h3>Conduite de projet</h3>
+                    <p>
+                        Gestion de projets informatiques de l'analyse des besoins à la livraison,
+                        en respectant les délais et les contraintes. Méthodes agiles et traditionnelles.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-en-cours"></div>
+                    </div>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>En cours</span>
+                    </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="#" class="link-btn">Détails</a>
+                    </div>
+                </div>
+                
+                <div class="competence-card animate">
+                    <div class="competence-icon">👥</div>
+                    <h3>Collaboration en équipe</h3>
+                    <p>
+                        Travail en équipe, communication efficace et utilisation d'outils collaboratifs
+                        dans un contexte professionnel informatique. Git, Jira, et méthodologies agiles.
+                    </p>
+                    <div class="status-bar">
+                        <div class="status-progress status-acquise"></div>
+                    </div>
+                    <div class="status-text">
+                        <span>Niveau de maîtrise</span>
+                        <span>Acquise</span>
+                    </div>
+                    <div class="competence-actions">
+                        <a href="#" class="link-btn">Voir les projets</a>
+                        <a href="#" class="link-btn">Détails</a>
+                    </div>
+                </div>
             </div>
-        </section>-->
-    </div>
+        </div>
+    </section>
     
     <footer>
-        <p>&copy; 2025 - Portfolio BUT Informatique - Tous droits réservés</p>
+        <div class="footer-content">
+            <p>&copy; 2025 Votre Nom - Portfolio BUT Informatique</p>
+        </div>
     </footer>
+
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.animate');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>
