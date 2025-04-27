@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Mes Projets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="hero-content">
+            <h1>Mes Projets</h1>
+            <p>Une collection de tous mes travaux et réalisations créatives</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </header>
+    
+    <main>
+        <section class="projects-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Portfolio</h2>
+                    <p>Découvrez l'ensemble de mes projets dans différents domaines</p>
+                </div>
+                
+                <div class="filter-container">
+                    <button class="filter-button active">Tous</button>
+                    <button class="filter-button">Web</button>
+                    <button class="filter-button">Mobile</button>
+                    <button class="filter-button">Design</button>
+                    <button class="filter-button">Autres</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Projet 1 -->
+                    <div class="project-card" style="--order: 1">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Site E-commerce">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Site E-commerce</h3>
+                            <span class="project-category">Web</span>
+                            <p class="project-description">Une boutique en ligne complète avec système de paiement et gestion des commandes.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 2 -->
+                    <div class="project-card" style="--order: 2">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Application Mobile Fitness">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Application Mobile Fitness</h3>
+                            <span class="project-category">Mobile</span>
+                            <p class="project-description">Application pour suivre vos entraînements et votre progression sportive.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 3 -->
+                    <div class="project-card" style="--order: 3">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Redesign Logo Entreprise">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Redesign Logo Entreprise</h3>
+                            <span class="project-category">Design</span>
+                            <p class="project-description">Refonte complète de l'identité visuelle d'une entreprise locale.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 4 -->
+                    <div class="project-card" style="--order: 4">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Portfolio Photographe">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Portfolio Photographe</h3>
+                            <span class="project-category">Web</span>
+                            <p class="project-description">Site vitrine pour présenter les œuvres d'un photographe professionnel.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 5 -->
+                    <div class="project-card" style="--order: 5">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Jeu Vidéo 2D">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Jeu Vidéo 2D</h3>
+                            <span class="project-category">Autres</span>
+                            <p class="project-description">Un jeu de plateforme développé avec Unity pour apprendre le game design.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Projet 6 -->
+                    <div class="project-card" style="--order: 6">
+                        <div class="project-image">
+                            <img src="/api/placeholder/350/200" alt="Dashboard Analytics">
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Dashboard Analytics</h3>
+                            <span class="project-category">Web</span>
+                            <p class="project-description">Interface d'administration avec visualisation de données en temps réel.</p>
+                            <a href="#" class="project-link">Voir le projet</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 - Portfolio de Projets</p>
+            <p>Créé avec passion et créativité</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Animation pour faire apparaître les éléments au scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            // Animation des cartes au chargement
+            setTimeout(() => {
+                projectCards.forEach(card => {
+                    card.style.opacity = '1';
+                });
+            }, 300);
+            
+            // Script pour le filtrage des projets
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Enlever la classe active de tous les boutons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    this.classList.add('active');
+                    
+                    const category = this.textContent;
+                    
+                    // Afficher/masquer les projets selon la catégorie
+                    projectCards.forEach(card => {
+                        const projectCategory = card.querySelector('.project-category').textContent;
+                        
+                        if (category === 'Tous' || category === projectCategory) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 500);
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
