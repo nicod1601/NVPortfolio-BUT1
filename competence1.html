@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation de Compétence</title>
+    <style>
+        :root {
+            --primary-color: #2b2d42;
+            --secondary-color: #6c63ff;
+            --accent-color: #ff6b6b;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+            --dark-gradient: linear-gradient(135deg, #2b2d42 0%, #1a1b2e 100%);
+            --accent-gradient: linear-gradient(135deg, #6c63ff 0%, #7e74ff 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .definition-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .definition-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .key-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .element-card {
+            flex: 1 1 calc(33.333% - 1.5rem);
+            min-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .element-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .projects-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .projects-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            flex: 1 1 calc(50% - 1.5rem);
+            min-width: 300px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            height: 200px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .evaluation-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .evaluation-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .evaluation-table th, .evaluation-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .evaluation-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .evaluation-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .evaluation-table tr:hover {
+            background-color: #ddd;
+        }
+        
+        .checkbox-cell {
+            text-align: center;
+        }
+        
+        .checkbox-cell span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #aaa;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .checkbox-cell span.checked::after {
+            content: "✓";
+            position: absolute;
+            font-size: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .element-card, .project-card {
+                flex: 1 1 100%;
+            }
+            
+            .evaluation-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        .btn{
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 id="competence-title">Développement d'application</h1>
+            <div>
+                <a href="./index.html" class="btn">Accueil</a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="definition-section">
+            <h2 class="definition-title">Définition</h2>
+            <p id="competence-definition">
+                La compétence de réaliser un développement consiste à concevoir, 
+                    implémenter et tester des solutions techniques répondant à des 
+                    besoins spécifiques. Elle inclut la capacité à analyser des 
+                    exigences, choisir des technologies appropriées, écrire du code 
+                    propre et maintenable, et collaborer avec d'autres membres d'une 
+                    équipe de développement. Les projets et travaux associés servent 
+                    de démonstration pratique de cette compétence, illustrant la 
+                    capacité à mener des projets de bout en bout, de la phase de conception 
+                    à la livraison finale.
+            </p>
+        </section>
+        
+        <section class="definition-section">
+            <h2 class="definition-title">Éléments Essentiels</h2>
+            <div class="key-elements">
+                <div class="element-card">
+                    <h3>Qualité du code</h3>
+                    <p>Description détaillée du premier élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
+                </div>
+                <div class="element-card">
+                    <h3>Evaluer mes résultat</h3>
+                    <p>Description détaillée du deuxième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
+                </div>
+                <div class="element-card">
+                    <h3>Interface</h3>
+                    <p>Description détaillée du troisième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
+                </div>
+                <div class="element-card">
+                    <h3>Conception simple en respectant les besoins du client</h3>
+                    <p>Description détaillée du quatrième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
+                </div>
+                <div class="element-card">
+                    <h3>technique appropriées</h3>
+                    <p>Description détaillée du cinquième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="projects-section">
+            <h2>Projets Démonstratifs</h2>
+            <p>Voici les projets que j'ai réalisés qui démontrent ma maîtrise de cette compétence.</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./img/infoTutors.png" height="200px">
+                    </div>
+                    <div class="project-content">
+                        <h3>Projet Site Web infotutors</h3>
+                        <p>Ce site permet aux étudiants de travailler sur les matières pour l'IUT Informatique.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./img/infoTutors.png" height="200px">
+                    </div>
+                    <div class="project-content">
+                        <h3>SAE 1.1</h3>
+                        <p>Cette SAE consite de coder en Java, un jeu de plateau et de parcours pour un cliens. </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="evaluation-section">
+            <h2>Tableau d'Évaluation</h2>
+            <p>Ce tableau permet de visualiser les éléments de la compétence que j'ai pu démontrer dans chaque projet.</p>
+            <table class="evaluation-table">
+                <thead>
+                    <tr>
+                        <th>Éléments de compétence</th>
+                        <th>Site Web</th>
+                        <th>SAE1.1</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Élément 1</td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                        <td class="checkbox-cell"><span></span></td>
+                    </tr>
+                    <tr>
+                        <td>Élément 2</td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Élément 3</td>
+                        <td class="checkbox-cell"><span></span></td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Élément 4</td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                        <td class="checkbox-cell"><span></span></td>
+                    </tr>
+                    <tr>
+                        <td>Élément 5</td>
+                        <td class="checkbox-cell"><span></span></td>
+                        <td class="checkbox-cell"><span class="checked"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 - Page de présentation de compétence</p>
+        </div>
+    </footer>
+</html>

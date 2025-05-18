@@ -3,199 +3,702 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>Portfolio BUT Informatique</title>
+    <title>Mon Portfolio</title>
+    <style>
+        /* Variables pour les couleurs */
+        :root {
+            --primary-color: #2b2d42;
+            --secondary-color: #6c63ff;
+            --accent-color: #ff6b6b;
+            --text-color: #2b2d42;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --dark-gradient: linear-gradient(135deg, #2b2d42 0%, #1a1b2e 100%);
+            --accent-gradient: linear-gradient(135deg, #6c63ff 0%, #7e74ff 100%);
+        }
+
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Effet de soulignement animé */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .animated-underline:hover::after {
+            width: 100%;
+        }
+
+        /* En-tête de navigation */
+        header {
+            background-color: rgba(43, 45, 66, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            background-color: rgba(43, 45, 66, 0.98);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            bottom: 0;
+            left: -100%;
+            background: var(--accent-gradient);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover::before {
+            left: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section avec animation */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--dark-gradient);
+            color: var(--white);
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%236c63ff' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.08;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding-top: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, var(--white), #d1d1f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 120px;
+            height: 5px;
+            background: var(--accent-gradient);
+            border-radius: 5px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: both;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.4s ease;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .btn:hover {
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.6);
+            transform: translateY(-5px);
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Sections avec design amélioré */
+        section {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-attachment: fixed;
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(108, 99, 255, 0.1);
+            top: -10px;
+            left: -20px;
+            z-index: -1;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+        }
+
+        /* Profile Section avec effets */
+        .profile {
+            background-color: var(--white);
+            display: flex;
+            gap: 5rem;
+            align-items: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+            padding: 5rem;
+            margin-top: -100px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .profile::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 120px;
+            height: 120px;
+            border: 4px solid rgba(108, 99, 255, 0.1);
+            border-radius: 30px;
+            z-index: -1;
+        }
+
+        .profile::after {
+            content: '';
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 107, 107, 0.1);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .profile-img {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .profile-img img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 5px solid white;
+            transition: all 0.5s ease;
+        }
+
+        .profile-img img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-content {
+            flex: 2;
+        }
+
+        .profile-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+        }
+
+        .profile-content p {
+            margin-bottom: 2rem;
+            line-height: 1.9;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        /* Future Section avec carte en 3D */
+        .future {
+            background-color: #f7f9ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            opacity: 0.05;
+            top: -150px;
+            right: -150px;
+        }
+
+        .future::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            opacity: 0.05;
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .future-content {
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        .future-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 3.5rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .future-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 107, 0.05) 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .future-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 30px 70px rgba(108, 99, 255, 0.15);
+        }
+
+        .future-card:hover::before {
+            opacity: 1;
+        }
+
+        .future-card h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .future-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 4px;
+        }
+
+        .future-card p {
+            margin-bottom: 2rem;
+            line-height: 1.9;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .future-icon {
+            font-size: 4rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+            transition: all 0.5s ease;
+        }
+
+        .future-card:hover .future-icon {
+            transform: translateY(-10px);
+            color: #7e74ff;
+        }
+
+        /* Skills Preview avec effet parallax */
+        .skills-preview {
+            background: var(--dark-gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 8rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%236c63ff' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2l-10 10V8zm0 4l12-12h2L40 20V12zm0 4l16-16h2L40 36V28zm0 4L52-4h2L40 20V16zm0 4L60.666-16h2L40 20V12zm0 4L73.333-28h2L40 20V8zm0 4L86-40h2L40 20V4z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+        
+        /* Ajoutez du padding à la dropdown-content pour créer une zone de "sécurité" */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(19, 19, 19, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 200px;
+            border-radius: 12px;
+            padding-top: 10px; /* Ajouter du padding en haut */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Supprimer la transformation Y pour simplifier l'interaction */
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%);
+        }
+
+        /* Corriger les styles des liens dans le dropdown */
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(238, 12, 12, 0.05);
+            color: var(--secondary-color);
+        }
+
+        /* Ajout d'un délai sur le dropdown */
+        .dropdown .dropdown-content {
+            transition-delay: 0s;
+        }
+
+        .dropdown:hover .dropdown-content {
+            transition-delay: 0.1s;
+        }
+
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 <body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="#" class="logo">Mon<span style="color: var(--secondary-color)">Portfolio</span></a>
+            <div class="nav-links">
+                <a href="./projet-travaille.html" class="animated-underline">Projets-Travailles</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">les Compétences</a>
+                    <div class="dropdown-content">
+                        <a href="./competence1.html">💻 Compétence-1</a>
+                        <a href="./competence2.html">🖥️ Compétence-2</a>
+                        <a href="#">📶 Compétence-3</a>
+                        <a href="#">🗂️ Compétence-4</a>
+                        <a href="#">📚 Compétence-5</a>
+                        <a href="./competence6.html">📙 Compétence-6</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Mon Portfolio</h1>
-            <p>BUT Informatique - Développeur passionné</p>
+            <h1>Portfolio</h1>
+            <p>Bienvenue sur mon portfolio professionnel. Découvrez mon parcours, mes compétences et mes ambitions.</p>
+            <a href="#profile" class="btn">Découvrir mon profil</a>
         </div>
-        <div class="scroll-indicator"></div>
+        <div class="parallax-bg">
+            <div class="parallax-circle circle-1"></div>
+            <div class="parallax-circle circle-2"></div>
+        </div>
     </section>
 
-    <section class="profile-section">
-        <div class="container">
-            <div class="profile-container">
-                <div class="profile-image-container animate">
-                    <div class="profile-image">
-                        <div><img src="./img/photo-profile.jpg" alt="Profil" width="150px"></div>
-                    </div>
-                    <div class="glowing-border"></div>
+    <!-- Profile Section -->
+    <section id="profile" class="profile fade-in">
+        <div class="profile-img">
+            <img src="./img/photo-profile.jpg" alt="Mon Profil">
+        </div>
+        <div class="profile-content">
+            <h3>Mon Profil</h3>
+            <p>Bonjour ! Je suis un passionné de [votre domaine], déterminé à exceller dans mon secteur. Mon parcours m'a permis de développer une solide expertise et une capacité d'adaptation face aux défis.</p>
+            <p>Je suis constamment en quête de nouveaux apprentissages et d'opportunités pour mettre en pratique mes compétences. Créatif, rigoureux et orienté solutions, je m'investis pleinement dans chaque projet que j'entreprends.</p>
+            <a href="#contact" class="btn">Me Contacter</a>
+        </div>
+    </section>
+
+    <!-- Future Career Section -->
+    <section id="future" class="future fade-in">
+        <div class="section-title">
+            <h2>Mon Métier Futur</h2>
+        </div>
+        <div class="future-content">
+            <div class="future-card">
+                <div class="future-icon">
+                    <i class="fas fa-laptop-code"></i>
                 </div>
-                
-                <div class="profile-details animate">
-                    <h2>Delpech Nicolas</h2>
-                    <h3>Étudiant en BUT Informatique</h3>
-                    <p>
-                        Passionné par le développement logiciel et les nouvelles technologies, je suis actuellement 
-                        en formation BUT Informatique où j'acquiers des compétences techniques solides et une
-                        vision globale du domaine informatique. Mon parcours combine des projets concrets, 
-                        des connaissances théoriques approfondies et une approche créative de la résolution de problèmes.
-                    </p>
-                </div>
+                <h3>[Votre Métier Futur]</h3>
+                <p>En tant que futur [votre métier], mon objectif est de [description de vos objectifs professionnels]. Je souhaite apporter ma contribution à [secteur/industrie] en mettant à profit mes compétences en [vos compétences clés].</p>
+                <p>Ma vision est de [votre vision professionnelle], tout en continuant à évoluer et à me perfectionner dans mon domaine d'expertise.</p>
+                <a href="#skills" class="btn">Voir mes compétences</a>
             </div>
         </div>
     </section>
 
-    <section class="competences-section">
-        <div class="container">
-            <div class="section-title animate">
-                <h2>Mes Compétences</h2>
-                <p>Découvrez les compétences que j'ai développées au cours de ma formation en BUT Informatique</p>
-            </div>
-            
-            <div class="competences-grid">
-                <!-- Compétence 1 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">💻</div>
-                    <h3>Réaliser un développement</h3>
-                    <p>
-                        Conception et implémentation d'applications informatiques
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c1"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C1/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-                
-                <!-- Compétence 2 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">⚡</div>
-                    <h3>Optimisation d'applications</h3>
-                    <p>
-                        Amélioration des performances et de la qualité des applications existantes
-                        par des techniques d'optimisation et de refactoring avancées.
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c2"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C2/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-                
-                <!-- Compétence 3 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">🔧</div>
-                    <h3>Administrer des systèmes informatiques communicants complexes</h3>
-                    <p>
-                        Installation, configuration et maintenance des systèmes informatiques
-                        et des infrastructures réseau. Gestion de serveurs Linux et Windows.
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c3"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C3/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-                
-                <!-- Compétence 4 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">🗄️</div>
-                    <h3>Gérer des données de l'information</h3>
-                    <p>
-                        Conception, administration et utilisation de bases de données pour stocker,
-                        organiser et exploiter des informations. SQL, NoSQL et Data Mining.
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c4"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C4/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-                
-                <!-- Compétence 5 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">📊</div>
-                    <h3>Conduire un Projet</h3>
-                    <p>
-                        Gestion de projets informatiques de l'analyse des besoins à la livraison,
-                        en respectant les délais et les contraintes. Méthodes agiles et traditionnelles.
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c5"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>80%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C5/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-                
-                <!-- Compétence 6 -->
-                <div class="competence-card animate">
-                    <div class="competence-icon">👥</div>
-                    <h3>Travailler en équipe</h3>
-                    <p>
-                        Travail en équipe, communication efficace et utilisation d'outils collaboratifs
-                        dans un contexte professionnel informatique. Git, Jira, et méthodologies agiles.
-                    </p>
-                    <div class="status-bar">
-                        <div class="status-progress status-c6"></div>
-                    </div>
-                    <div class="status-text">
-                        <span>Niveau de maîtrise</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="competence-actions">
-                        <a href="./Competences/C6/index.html" class="link-btn">Voir la Page</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Delpech Nicolas - Portfolio BUT Informatique</p>
-        </div>
-    </footer>
 
-    <script>
-        // Animation on scroll
-        document.addEventListener('DOMContentLoaded', () => {
-            const animateElements = document.querySelectorAll('.animate');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            animateElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(element);
-            });
-        });
-    </script>
+</body>
+</html>
 </body>
 </html>
