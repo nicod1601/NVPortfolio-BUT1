@@ -624,6 +624,81 @@
         .dropdown:hover .dropdown-content {
             transition-delay: 0.1s;
         }
+        
+        /*Tableau */
+        .skills-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+
+        .skills-table th {
+            background: linear-gradient(135deg, #5a67d8, #667eea);
+            color: white;
+            padding: 15px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .skills-table th:first-child {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            border-top-left-radius: 10px;
+            min-width: 150px;
+        }
+
+        .skills-table th:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        .skills-table td {
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .skills-table td:first-child {
+            background: linear-gradient(135deg, #e8f5e8, #f0fff4);
+            font-weight: 600;
+            color: #2d3748;
+            text-align: left;
+            padding-left: 15px;
+            border-left: 4px solid #48bb78;
+        }
+
+        .skills-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: scale(1.01);
+        }
+
+        .skills-table tbody tr:hover td:first-child {
+            background: linear-gradient(135deg, #d4edda, #e8f5e8);
+        }
+
+        .cross {
+            color: #48bb78;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cross:hover {
+            color: #38a169;
+            transform: scale(1.2);
+        }
+
+        .empty-cell {
+            color: #cbd5e0;
+            font-size: 1.2rem;
+        }
 
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -675,25 +750,55 @@
             <h3>Mon Profil</h3>
             <p>Bonjour ! Je suis un passionné de [votre domaine], déterminé à exceller dans mon secteur. Mon parcours m'a permis de développer une solide expertise et une capacité d'adaptation face aux défis.</p>
             <p>Je suis constamment en quête de nouveaux apprentissages et d'opportunités pour mettre en pratique mes compétences. Créatif, rigoureux et orienté solutions, je m'investis pleinement dans chaque projet que j'entreprends.</p>
-            <a href="#contact" class="btn">Me Contacter</a>
         </div>
     </section>
 
-    <!-- Future Career Section -->
-    <section id="future" class="future fade-in">
-        <div class="section-title">
-            <h2>Mon Métier Futur</h2>
-        </div>
-        <div class="future-content">
-            <div class="future-card">
-                <div class="future-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3>[Votre Métier Futur]</h3>
-                <p>En tant que futur [votre métier], mon objectif est de [description de vos objectifs professionnels]. Je souhaite apporter ma contribution à [secteur/industrie] en mettant à profit mes compétences en [vos compétences clés].</p>
-                <p>Ma vision est de [votre vision professionnelle], tout en continuant à évoluer et à me perfectionner dans mon domaine d'expertise.</p>
-                <a href="#skills" class="btn">Voir mes compétences</a>
-            </div>
+    <!-- Tableau Section -->
+    <section class="tableau-section">
+        <div class="tableau-container">
+            <h3 class="tableau-title">Projets x Compétences </h3>
+            <table class="skills-table">
+                <thead>
+                    <tr>
+                        <th>Projets</th>
+                        <th>Compétence 1</th>
+                        <th>Compétence 2</th>
+                        <th>Compétence 3</th>
+                        <th>Compétence 4</th>
+                        <th>Compétence 5</th>
+                        <th>Compétence 6</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SAE 2.01</td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Site Web</td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Application</td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="empty-cell">—</span></td>
+                        <td><span class="cross">✓</span></td>
+                        <td><span class="cross">✓</span></td
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
