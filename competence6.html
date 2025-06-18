@@ -3,231 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation de Compétence</title>
+    <title>Présentation de Compétence - Travaille en equipe</title>
     <style>
         :root {
             --primary-color: #2b2d42;
             --secondary-color: #6c63ff;
             --accent-color: #ff6b6b;
+            --success-color: #28a745;
             --light-bg: #f8f9fa;
             --dark-bg: #343a40;
             --text-color: #333;
             --light-text: #f8f9fa;
-            --dark-gradient: linear-gradient(135deg, #2b2d42 0%, #1a1b2e 100%);
-            --accent-gradient: linear-gradient(135deg, #6c63ff 0%, #7e74ff 100%);
+            --border-color: #e9ecef;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #2b2d42 0%, #1a1b2e 100%);
+            --gradient-accent: linear-gradient(135deg, #6c63ff 0%, #7e74ff 100%);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light-bg);
             color: var(--text-color);
             line-height: 1.6;
         }
         
+        /* Header */
         header {
-            background-color: var(--primary-color);
+            background: var(--gradient-primary);
             color: white;
             text-align: center;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
         }
         
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .definition-section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .definition-title {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
-        }
-        
-        .key-elements {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .element-card {
-            flex: 1 1 calc(33.333% - 1.5rem);
-            min-width: 250px;
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-top: 4px solid var(--primary-color);
-            transition: transform 0.3s ease;
-        }
-        
-        .element-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .element-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-        
-        .projects-section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .projects-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .projects-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-        
-        .project-card {
-            flex: 1 1 calc(50% - 1.5rem);
-            min-width: 300px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .project-image {
-            height: 200px;
-            background-color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .evaluation-section {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .evaluation-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .evaluation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        
-        .evaluation-table th, .evaluation-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        
-        .evaluation-table th {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .evaluation-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        
-        .evaluation-table tr:hover {
-            background-color: #ddd;
-        }
-        
-        .checkbox-cell {
-            text-align: center;
-        }
-        
-        .checkbox-cell span {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #aaa;
-            border-radius: 4px;
+            font-weight: 700;
             position: relative;
+            z-index: 1;
         }
         
-        .checkbox-cell span.checked::after {
-            content: "✓";
-            position: absolute;
-            font-size: 16px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--primary-color);
-            font-weight: bold;
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
         
-        footer {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .element-card, .project-card {
-                flex: 1 1 100%;
-            }
-            
-            .evaluation-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
-
-        .btn{
+        .btn {
             display: inline-block;
-            background: var(--accent-gradient);
-            color: var(--white);
+            background: var(--gradient-accent);
+            color: white;
             padding: 1rem 2.5rem;
             border-radius: 50px;
             text-decoration: none;
@@ -235,129 +81,558 @@
             font-size: 1.1rem;
             transition: all 0.4s ease;
             box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.6);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Definition Section */
+        .definition-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .definition-title {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .definition-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+        
+        .definition-text {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #555;
+            margin-top: 2rem;
+        }
+        
+        /* Competence Elements */
+        .competence-element {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .competence-element:hover {
+            transform: translateY(-5px);
+        }
+        
+        .element-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .element-number {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .element-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .element-description {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: justify;
+            margin-bottom: 2rem;
+        }
+        
+        /* Evidence Grid */
+        .evidence-section {
+            margin-top: 2rem;
+        }
+        
+        .evidence-title {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .evidence-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
-            z-index: 1;
-            animation: fadeInUp 1s ease-out 0.6s;
-            animation-fill-mode: both;
-
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+        }
+        
+        .evidence-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .evidence-image:not(:has(img))::before {
+            content: '📸';
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Modal pour agrandir les images */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+        }
+        
+        /* Evaluation Table */
+        .evaluation-section {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .evaluation-title {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .evaluation-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .evaluation-table th {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .evaluation-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+        
+        .evaluation-table tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        .checkbox-cell {
+            text-align: center;
+            width: 100px;
+        }
+        
+        .checkbox {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox.checked {
+            background: var(--success-color);
+            border-color: var(--success-color);
+        }
+        
+        .checkbox.checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .definition-section,
+            .competence-element,
+            .evaluation-section {
+                padding: 2rem;
+            }
+            
+            .element-title {
+                font-size: 1.5rem;
+            }
+            
+            .evidence-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .evaluation-table {
+                font-size: 0.9rem;
+            }
+            
+            .evaluation-table th,
+            .evaluation-table td {
+                padding: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            header {
+                padding: 2rem 0;
+            }
+            
+            .definition-section,
+            .competence-element,
+            .evaluation-section {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1 id="competence-title">Travailler en équipe</h1>
-            <div>
-                <a href="./index.html" class="btn">Accueil</a>
-            </div>
+            <h1>Travailler en équipe</h1>
+            <p>Présentation de mes compétences en travaille d'équipe</p>
+            <a href="./index.html" class="btn">Retour à l'accueil</a>
         </div>
     </header>
     
     <main class="container">
+        <!-- Définition générale -->
         <section class="definition-section">
-            <h2 class="definition-title">Définition</h2>
-            <p id="competence-definition">
+            <h2 class="definition-title">Définition de la compétence</h2>
+            <p class="definition-text">
                 La compétence de travailler en équipe est très important dans un groupe informatique.
             </p>
         </section>
         
-        <section class="definition-section">
-            <h2 class="definition-title">Éléments Essentiels</h2>
-            <div class="key-elements">
-                <div class="element-card">
-                    <h3>Identifier Status, Fonctions, Rôles</h3>
-                    <p>Description détaillée du premier élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
-                </div>
-                <div class="element-card">
-                    <h3>Aptitudes requis métier de l'info</h3>
-                    <p>Description détaillée du deuxième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
-                </div>
-                <div class="element-card">
-                    <h3>Conpétences interpersonnelles pour travailler en équipe</h3>
-                    <p>Description détaillée du troisième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
-                </div>
-                <div class="element-card">
-                    <h3>Veiller au respecter des contraintes réglementaire et législatives</h3>
-                    <p>Description détaillée du quatrième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
-                </div>
-                <div class="element-card">
-                    <h3>Communication efficace et collaborativer</h3>
-                    <p>Description détaillée du cinquième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.</p>
-                </div>
+        <!-- Élément 1: Qualité du code -->
+        <section class="competence-element">
+            <div class="element-header">
+                <div class="element-number">1</div>
+                <h2 class="element-title">Identifier Status, Fonctions, Rôles</h2>
+                <p class="element-description">
+                    Description détaillée du premier élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.
+                </p>
             </div>
-        </section>
-        
-        <section class="projects-section">
-            <h2>Projets Démonstratifs</h2>
-            <p>Voici les projets que j'ai réalisés qui démontrent ma maîtrise de cette compétence.</p>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./img/infoTutors.png" height="200px">
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">Preuves et exemples</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-image">
+                        <a href="./img/panelJourut.png" target="_blank">
+                            <img src="./img/panelJourut.png" alt="Preuve de qualité de code">
+                        </a>
                     </div>
-                    <div class="project-content">
-                        <h3>SAE2.6</h3>
-                        <p>Ce site permet aux étudiants de travailler sur les matières pour l'IUT Informatique.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="./img/infoTutors.png" height="200px">
-                    </div>
-                    <div class="project-content">
-                        <h3>SAE 1.1</h3>
-                        <p>Cette SAE consite de coder en Java, un jeu de plateau et de parcours pour un cliens. </p>
+
+                    <div class="evidence-image">
+                        <a href="./img/metier.png" target="_blank">
+                            <img src="./img/metier.png" alt="Preuve de qualité de code">
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section class="evaluation-section">
-            <h2>Tableau d'Évaluation</h2>
-            <p>Ce tableau permet de visualiser les éléments de la compétence que j'ai pu démontrer dans chaque projet.</p>
-            <table class="evaluation-table">
-                <thead>
-                    <tr>
-                        <th>Éléments de compétence</th>
-                        <th>Site Web</th>
-                        <th>SAE1.1</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Élément 1</td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                        <td class="checkbox-cell"><span></span></td>
-                    </tr>
-                    <tr>
-                        <td>Élément 2</td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Élément 3</td>
-                        <td class="checkbox-cell"><span></span></td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Élément 4</td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                        <td class="checkbox-cell"><span></span></td>
-                    </tr>
-                    <tr>
-                        <td>Élément 5</td>
-                        <td class="checkbox-cell"><span></span></td>
-                        <td class="checkbox-cell"><span class="checked"></span></td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Élément 2: Évaluer mes résultats -->
+        <section class="competence-element">
+            <div class="element-header">
+                <div class="element-number">2</div>
+                <h2 class="element-title">Aptitudes requis métier de l'info</h2>
+                <p class="element-description">
+                   Description détaillée du deuxième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.
+                </p>
+            </div>
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">Preuves et exemples</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-image">
+                        <a href="./img/expection bonds.png" target="_blank">
+                            <img src="./img/expection bonds.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+
+                    <div class="evidence-image">
+                        <a href="./img/Capture d’écran 2025-06-18 112747.png" target="_blank">
+                            <img src="./img/Capture d’écran 2025-06-18 112747.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
+        
+        <!-- Élément 3: Interface -->
+        <section class="competence-element">
+            <div class="element-header">
+                <div class="element-number">3</div>
+                <h2 class="element-title">Conpétences interpersonnelles pour travailler en équipe</h2>
+                <p class="element-description">
+                   Description détaillée du troisième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.
+                </p>
+            </div>
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">Preuves et exemples</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-image">
+                        <a href="./img/infoTutors.png" target="_blank">
+                            <img src="./img/infoTutors.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+
+                    <div class="evidence-image">
+                        <a href="./img/interface-SAE.png" target="_blank">
+                            <img src="./img/interface-SAE.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Élément 4: Conception simple respectant les besoins -->
+        <section class="competence-element">
+            <div class="element-header">
+                <div class="element-number">4</div>
+                <h2 class="element-title">Veiller au respecter des contraintes réglementaire et législatives</h2>
+                <p class="element-description">
+                   Veiller au respecter des contraintes réglementaire et législatives
+                </p>
+            </div>
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">Preuves et exemples</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-image">
+                        <a href="./img/Doc-MPM-Java.pdf" target="_blank">
+                            <img src="./img/docMPM.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Élément 5: Technologies appropriées -->
+        <section class="competence-element">
+            <div class="element-header">
+                <div class="element-number">5</div>
+                <h2 class="element-title">Communication efficace et collaborativer</h2>
+                <p class="element-description">
+                    Description détaillée du cinquième élément essentiel de cette compétence. Pourquoi est-il important et comment le maîtriser.
+                </p>
+            </div>
+            
+            <div class="evidence-section">
+                <h3 class="evidence-title">Preuves et exemples</h3>
+                <div class="evidence-grid">
+                    <div class="evidence-image">
+                        <a href="./img/Doc-MPM-Java.pdf" target="_blank">
+                            <img src="./img/docMPM.png" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+
+                    <div class="evidence-image">
+                        <a href="./img/" target="_blank">
+                            <img src="./img/" alt="Preuve de qualité de code">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tableau d'évaluation -->
+        <!-- <section class="evaluation-section">
+            <h2 class="evaluation-title">Tableau d'évaluation des compétences</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                Ce tableau synthétise les éléments de compétence démontrés dans chaque projet
+            </p>
+            
+            <div class="table-container">
+                <table class="evaluation-table">
+                    <thead>
+                        <tr>
+                            <th>Éléments de compétence</th>
+                            <th>Site Web InfoTutors</th>
+                            <th>SAE 1.1 - Jeu Java</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Qualité du code</strong></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Évaluer mes résultats</strong></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interface utilisateur</strong></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conception respectant les besoins</strong></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                            <td class="checkbox-cell"><span class="checkbox"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technologies appropriées</strong></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                            <td class="checkbox-cell"><span class="checkbox checked"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>-->
     </main>
+    
+    <!-- Modal pour agrandir les images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 - Page de présentation de compétence</p>
+            <p>&copy; 2025 - Présentation de compétences en développement d'application</p>
         </div>
     </footer>
+</body>
 </html>
