@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet MPM - SAÉ 2.01/2.02/2.05</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-bg: #ecf0f1;
+            --dark-bg: #34495e;
+            --text-color: #2c3e50;
+            --light-text: #ffffff;
+            --border-color: #bdc3c7;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .author-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .team-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin: 4rem 0;
+        }
+
+        /* Project Overview */
+        .project-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc8 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Project Details Grid */
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-content {
+            font-size: 1rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--secondary-color);
+            margin-top: 0.2rem;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Technologies Used */
+        .tech-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Phases Section */
+        .phases-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .phases-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phases-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            border-radius: 1.5px;
+        }
+
+        .phase-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .phase-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Objectives Section */
+        .objectives-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--success-color);
+            transition: transform 0.2s ease;
+        }
+
+        .objective-item:hover {
+            transform: translateX(5px);
+        }
+
+        .objective-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--success-color);
+        }
+
+        .objective-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-details {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .project-tags {
+                justify-content: center;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .team-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 3rem 0;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="project-title">Méthode MPM</h1>
+            <p class="project-subtitle">Méthode des Potentiels et antécédents Métra - Gestion de projets</p>
+            <div class="project-tags">
+                <span class="tag">SAÉ 2.01</span>
+                <span class="tag">SAÉ 2.02</span>
+                <span class="tag">SAÉ 2.05</span>
+                <span class="tag">Java</span>
+                <span class="tag">Juin 2025</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container main-content">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <h2 class="section-title">Aperçu du Projet</h2>
+            <p class="project-description">
+                La méthode des Potentiels et antécédents Métra (MPM) est une technique de planification et d'ordonnancement utilisée principalement pour gérer des projets complexes ou de longue durée, tels que la construction, les chantiers ou les projets industriels. Cette méthode permet de déterminer la durée minimale d'un projet ainsi que les dates de début et de fin optimales pour chaque tâche, en tenant compte des dépendances et des contraintes.
+            </p>
+            <p class="project-description">
+                Ce projet consiste à développer une application complète permettant de visualiser et de simuler la méthode MPM, avec une interface en ligne de commande (CUI) et une interface graphique (GUI) interactive. L'application calcule automatiquement les dates au plus tôt et au plus tard, identifie le chemin critique et propose une simulation progressive du calcul.
+            </p>
+        </section>
+
+        <!-- Project Details -->
+        <section class="project-details">
+            <div class="detail-card">
+                <div class="detail-icon">📅</div>
+                <h3 class="detail-title">Période</h3>
+                <p class="detail-content">Juin 2025<br>IUT Le Havre<br>Département Informatique</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🎯</div>
+                <h3 class="detail-title">Objectifs</h3>
+                <p class="detail-content">Modélisation MPM<br>Interface CUI & GUI<br>Simulation interactive</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">📊</div>
+                <h3 class="detail-title">Fonctionnalités</h3>
+                <p class="detail-content">Calcul automatique<br>Chemin critique<br>Visualisation graphique</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🔧</div>
+                <h3 class="detail-title">Technologies</h3>
+                <p class="detail-content">Java<br>Interface Swing<br>Gestion de fichiers</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section">
+            <h2 class="section-title">Fonctionnalités Principales</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Modélisation des tâches</h4>
+                        <p class="feature-text">Représentation graphique des tâches avec leurs dépendances et durées, stockage dans des fichiers texte structurés</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💻</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Interface CUI</h4>
+                        <p class="feature-text">Visualisation textuelle complète avec dates au plus tôt/tard, marges et listes de dépendances</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🖼️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Interface graphique</h4>
+                        <p class="feature-text">Représentation visuelle du graphe MPM avec positionnement automatique et interaction souris</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Simulation progressive</h4>
+                        <p class="feature-text">Calcul étape par étape des dates avec boutons "+ tôt" et "+ tard" pour comprendre l'algorithme</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Chemin critique</h4>
+                        <p class="feature-text">Identification et mise en évidence du ou des chemins critiques du projet</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔄</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Fonctionnalités avancées</h4>
+                        <p class="feature-text">Ajout/suppression de tâches, modification des durées, sauvegarde de la représentation graphique</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technologies -->
+        <section class="tech-section">
+            <h2 class="section-title">Technologies Utilisées</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">☕</div>
+                    <div class="tech-name">Java</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖼️</div>
+                    <div class="tech-name">Swing</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Graphes</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📁</div>
+                    <div class="tech-name">I/O Files</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Graphics2D</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖱️</div>
+                    <div class="tech-name">Event Handling</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Phases -->
+        <section class="phases-section">
+            <h2 class="section-title">Phases du Projet</h2>
+            <div class="phases-timeline">
+                <div class="phase-item">
+                    <h3 class="phase-title">Phase 1 : Conception</h3>
+                    <p class="phase-date">Échéance : 2 juin 2025 à 14h00</p>
+                    <p class="phase-description">
+                        Réalisation du diagramme de classes pour gérer le graphe de tâches dans le cadre de la MPM. Modélisation des relations entre tâches, durées et dépendances.
+                    </p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Phase 2 : Interface CUI</h3>
+                    <p class="phase-date">Échéance : 3 juin 2025 à 9h00</p>
+                    <p class="phase-description">
+                        Développement de l'interface en ligne de commande avec visualisation complète des tâches, calcul des dates et affichage des marges et dépendances.
+                    </p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Phase 3 : Interface GUI</h3>
+                    <p class="phase-date">Échéance : 17 juin 2025 à 12h00</p>
+                    <p class="phase-description">
+                        Création de l'interface graphique avec représentation visuelle du graphe, simulation progressive du calcul MPM, identification du chemin critique et fonctionnalités avancées.
+                    </p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Phase 4 : Tests et Validation</h3>
+                    <p class="phase-date">Validation continue</p>
+                    <p class="phase-description">
+                        Élaboration de scénarios de test pour valider le fonctionnement de l'application, identification des cas particuliers et préparation de la démonstration.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - IUT Le Havre, Département Informatique - SAÉ 2.01, 2.02, 2.05</p>
+        </div>
+    </footer>
+</body>
+</html>

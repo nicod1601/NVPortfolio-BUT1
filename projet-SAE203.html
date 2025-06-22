@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAE 2.03 - Configuration Système Linux Debian</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-bg: #ecf0f1;
+            --dark-bg: #34495e;
+            --text-color: #2c3e50;
+            --light-text: #ffffff;
+            --border-color: #bdc3c7;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .author-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .team-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin: 4rem 0;
+        }
+
+        /* Project Overview */
+        .project-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc8 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Project Details Grid */
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-content {
+            font-size: 1rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--secondary-color);
+            margin-top: 0.2rem;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Technologies Used */
+        .tech-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Phases Section */
+        .phases-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .phases-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phases-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            border-radius: 1.5px;
+        }
+
+        .phase-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .phase-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Objectives Section */
+        .objectives-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--success-color);
+            transition: transform 0.2s ease;
+        }
+
+        .objective-item:hover {
+            transform: translateX(5px);
+        }
+
+        .objective-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--success-color);
+        }
+
+        .objective-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-details {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .project-tags {
+                justify-content: center;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .team-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 3rem 0;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="project-title">SAE 2.03</h1>
+            <p class="project-subtitle">Configuration et Installation Système Linux Debian</p>
+            <div class="author-info">
+                <strong>Équipe de Projet</strong>
+                <div class="team-info">
+                    <div class="team-member">
+                        <strong>Nicolas Delpech</strong><br>
+                        <small>Prise de notes, Rédaction, Mise en page, Recherche</small>
+                    </div>
+                    <div class="team-member">
+                        <strong>Thibault Mangeant</strong><br>
+                        <small>Tests sur machine, Configuration VM</small>
+                    </div>
+                    <div class="team-member">
+                        <strong>Louis Thomazeau-Agullo</strong><br>
+                        <small>Tests sur machine, Configuration VM</small>
+                    </div>
+                </div>
+            </div>
+            <div class="project-tags">
+                <span class="tag">Linux</span>
+                <span class="tag">Debian</span>
+                <span class="tag">Virtualisation</span>
+                <span class="tag">Système</span>
+                <span class="tag">Administration</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container main-content">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <h2 class="section-title">Présentation du Projet</h2>
+            <p class="project-description">
+                Ce projet consiste en la <span class="highlight">configuration complète d'une machine virtuelle Linux Debian</span> dans un environnement Windows. L'objectif principal est de maîtriser l'installation, la configuration et l'administration d'un système Linux en utilisant des outils de virtualisation.
+            </p>
+            <p class="project-description">
+                Le projet couvre l'ensemble des étapes nécessaires pour obtenir un système Debian fonctionnel, depuis l'installation de base jusqu'à la configuration avancée des utilisateurs, des droits d'accès et de l'environnement système. Cette expérience pratique permet d'acquérir des compétences essentielles en administration système Linux.
+            </p>
+        </section>
+
+        <!-- Project Details -->
+        <section class="project-details">
+            <div class="detail-card">
+                <div class="detail-icon">🖥️</div>
+                <h3 class="detail-title">Type de Projet</h3>
+                <p class="detail-content">Système & Administration<br>Machine Virtuelle<br>Configuration Linux</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🎯</div>
+                <h3 class="detail-title">Objectif Principal</h3>
+                <p class="detail-content">Installation Debian<br>Configuration Système<br>Administration Utilisateurs</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🔧</div>
+                <h3 class="detail-title">Environnement</h3>
+                <p class="detail-content">Windows 64-bit<br>Machine Virtuelle<br>Debian Linux</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">👥</div>
+                <h3 class="detail-title">Équipe</h3>
+                <p class="detail-content">3 Étudiants<br>Collaboration<br>Spécialisation des Rôles</p>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2 class="section-title">Étapes de Configuration</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">💿</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Installation Linux sous Windows</h4>
+                        <p class="feature-text">Configuration de la machine virtuelle et installation complète du système Debian</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚙️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Réglage et Démarrage</h4>
+                        <p class="feature-text">Configuration initiale du système et paramétrage des services de base</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Analyse des Variables d'Environnement</h4>
+                        <p class="feature-text">Étude comparative des environnements utilisateur (debian vs root)</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📦</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Gestion des Paquets APT</h4>
+                        <p class="feature-text">Configuration des sources APT et mise à jour du système</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⌨️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Configuration Clavier (AZERTY)</h4>
+                        <p class="feature-text">Installation et configuration du clavier français</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">👤</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Gestion des Utilisateurs</h4>
+                        <p class="feature-text">Attribution des droits sudo et configuration des comptes utilisateurs</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📖</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Pages de Manuel</h4>
+                        <p class="feature-text">Installation et configuration des manuels d'aide en français</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌍</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Localisation Française</h4>
+                        <p class="feature-text">Configuration des locales et de la langue du système</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technologies -->
+        <section class="tech-section">
+            <h2 class="section-title">Technologies et Outils</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🐧</div>
+                    <div class="tech-name">Linux Debian</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🖥️</div>
+                    <div class="tech-name">Machine Virtuelle</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-name">APT</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">Sudo</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📝</div>
+                    <div class="tech-name">Nano</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔧</div>
+                    <div class="tech-name">Bash</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hardware Specifications -->
+        <section class="tech-section">
+            <h2 class="section-title">Matériel et Équipement</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">💻</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">PC Nicolas Delpech</h4>
+                        <p class="feature-text">Processeur: AMD Ryzen 5 7520U<br>Mémoire: 16 Go RAM<br>OS: Windows 64-bit</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🖥️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">PC Thibault Mangeant</h4>
+                        <p class="feature-text">Processeur: AMD Ryzen 7 7840HS<br>Mémoire: 16 Go RAM<br>OS: Windows 64-bit</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚙️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">PC Louis Thomazeau-Agullo</h4>
+                        <p class="feature-text">Processeur: Intel Celeron N4020<br>Mémoire: 8 Go RAM<br>OS: Linux Debian x86_64</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commands Used -->
+        <section class="phases-section">
+            <h2 class="section-title">Commandes Utilisées</h2>
+            <div class="phases-timeline">
+                <div class="phase-item">
+                    <h3 class="phase-title">Gestion des Paquets</h3>
+                    <p class="phase-description">apt-get, update, upgrade - Gestion et mise à jour des paquets système</p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Configuration Système</h3>
+                    <p class="phase-description">dpkg-reconfigure, locale - Configuration des paramètres système et de localisation</p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Gestion Utilisateurs</h3>
+                    <p class="phase-description">adduser, sudo, id - Création et gestion des comptes utilisateurs</p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Navigation et Fichiers</h3>
+                    <p class="phase-description">cd, ls, cat, nano - Navigation dans le système de fichiers et édition</p>
+                </div>
+                <div class="phase-item">
+                    <h3 class="phase-title">Informations Système</h3>
+                    <p class="phase-description">uname, env, man, echo - Consultation des informations système</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectives -->
+        <section class="objectives-section">
+            <h2 class="section-title">Objectifs du Projet</h2>
+            <div class="objectives-list">
+                <div class="objective-item">
+                    <span class="objective-icon">🎯</span>
+                    <span class="objective-text">Installer et configurer une machine virtuelle Linux Debian</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🔧</span>
+                    <span class="objective-text">Maîtriser les commandes de base de l'administration système</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">👥</span>
+                    <span class="objective-text">Configurer les utilisateurs et leurs droits d'accès</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">📦</span>
+                    <span class="objective-text">Gérer les paquets et les mises à jour système</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🌍</span>
+                    <span class="objective-text">Configurer la localisation et la langue du système</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">📚</span>
+                    <span class="objective-text">Acquérir des compétences pratiques en administration Linux</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-name">SAE 2.03 - Équipe Projet</div>
+                <div class="footer-details">
+                    Nicolas Delpech, Thibault Mangeant, Louis Thomazeau-Agullo<br>
+                    IUT du Havre - Configuration Système Linux Debian
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UmbraTemporis - Projet Web Interactif</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-bg: #ecf0f1;
+            --dark-bg: #34495e;
+            --text-color: #2c3e50;
+            --light-text: #ffffff;
+            --border-color: #bdc3c7;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .author-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem auto;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .team-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin: 4rem 0;
+        }
+
+        /* Project Overview */
+        .project-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            text-align: justify;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8e6cf 0%, #dcedc8 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        /* Project Details Grid */
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .detail-content {
+            font-size: 1rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-color);
+            transition: transform 0.2s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--secondary-color);
+            margin-top: 0.2rem;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-text {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Technologies Used */
+        .tech-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-name {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Phases Section */
+        .phases-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .phases-timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin-top: 2rem;
+        }
+
+        .phases-timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            border-radius: 1.5px;
+        }
+
+        .phase-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .phase-item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Objectives Section */
+        .objectives-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .objectives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid var(--success-color);
+            transition: transform 0.2s ease;
+        }
+
+        .objective-item:hover {
+            transform: translateX(5px);
+        }
+
+        .objective-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+            color: var(--success-color);
+        }
+
+        .objective-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gradient-primary);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-details {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .project-tags {
+                justify-content: center;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .team-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header {
+                padding: 3rem 0;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .project-overview,
+            .features-section,
+            .tech-section,
+            .phases-section,
+            .objectives-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="project-title">UmbraTemporis</h1>
+            <p class="project-subtitle">Site Web Interactif pour Jeu en Ligne</p>
+            <div class="author-info">
+                <strong>Nicolas Delpech</strong><br>
+                Étudiant Informatique - IUT du Havre<br>
+                23 février 2025
+            </div>
+            <div class="project-tags">
+                <span class="tag">Web Development</span>
+                <span class="tag">Gaming</span>
+                <span class="tag">Interactive</span>
+                <span class="tag">RPG Universe</span>
+                <span class="tag">2025</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container main-content">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <h2 class="section-title">Présentation du Produit</h2>
+            <p class="project-description">
+                Bienvenue dans l'univers de <span class="highlight">UmbraTemporis</span>, un <span class="highlight">site web interactif</span> conçu pour accompagner un futur jeu en ligne. Ce site offre une <span class="highlight">plateforme communautaire</span> complète où les joueurs peuvent gérer leur compte, explorer les personnages et suivre les boss du jeu.
+            </p>
+            <p class="project-description">
+                Ce projet vise à créer une expérience immersive qui prolonge l'univers du jeu au-delà de l'application principale, offrant aux joueurs un espace dédié pour approfondir leur connaissance du monde d'UmbraTemporis et interagir avec la communauté.
+            </p>
+        </section>
+
+        <!-- Project Details -->
+        <section class="project-details">
+            <div class="detail-card">
+                <div class="detail-icon">🎮</div>
+                <h3 class="detail-title">Type de Projet</h3>
+                <p class="detail-content">Site Web Interactif<br>Plateforme Gaming<br>Interface Communautaire</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🎯</div>
+                <h3 class="detail-title">Public Cible</h3>
+                <p class="detail-content">Joueurs RPG<br>Communauté Gaming<br>Fans d'UmbraTemporis</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🚀</div>
+                <h3 class="detail-title">Statut</h3>
+                <p class="detail-content">En Développement<br>Phase de Conception<br>Prototypage Avancé</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">💻</div>
+                <h3 class="detail-title">Technologies</h3>
+                <p class="detail-content">HTML5, CSS3<br>JavaScript ES6+<br>Design Responsive</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section">
+            <h2 class="section-title">Fonctionnalités Principales</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🔐</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Système de Connexion</h4>
+                        <p class="feature-text">Page de connexion sécurisée avec redirection automatique vers la création de compte pour les nouveaux utilisateurs</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Création de Compte</h4>
+                        <p class="feature-text">Interface simplifiée et intuitive permettant aux joueurs de s'inscrire rapidement à la plateforme</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⚔️</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Galerie des Personnages</h4>
+                        <p class="feature-text">Liste détaillée des personnages du jeu avec leurs statistiques, compétences et lore complet</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⭐</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Système d'Attributs</h4>
+                        <p class="feature-text">Présentation des différentes catégories et classifications des personnages avec leurs spécificités</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">👹</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Guide des Boss</h4>
+                        <p class="feature-text">Informations détaillées sur les boss, leurs phases de combat, attaques et stratégies recommandées</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎨</span>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Design Immersif</h4>
+                        <p class="feature-text">Interface inspirée des RPG avec une ergonomie optimisée et une navigation fluide pour les joueurs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technologies -->
+        <section class="tech-section">
+            <h2 class="section-title">Technologies Utilisées</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🌐</div>
+                    <div class="tech-name">HTML5</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">CSS3</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">JavaScript</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Responsive</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🎮</div>
+                    <div class="tech-name">Gaming UX</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-icon">🔒</div>
+                    <div class="tech-name">Sécurité</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectives -->
+        <section class="objectives-section">
+            <h2 class="section-title">Objectifs du Projet</h2>
+            <div class="objectives-list">
+                <div class="objective-item">
+                    <span class="objective-icon">🎯</span>
+                    <span class="objective-text">Créer une plateforme interactive dédiée aux joueurs d'UmbraTemporis</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🔧</span>
+                    <span class="objective-text">Faciliter la gestion des comptes et l'accès aux informations du jeu</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🎨</span>
+                    <span class="objective-text">Offrir un design immersif avec une navigation fluide et intuitive</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">🔄</span>
+                    <span class="objective-text">Proposer des mises à jour régulières et enrichir l'univers du jeu</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">👥</span>
+                    <span class="objective-text">Développer une communauté active autour du jeu</span>
+                </div>
+                <div class="objective-item">
+                    <span class="objective-icon">📈</span>
+                    <span class="objective-text">Améliorer l'engagement et la rétention des joueurs</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-name">Nicolas Delpech</div>
+                <div class="footer-details">
+                    Étudiant Informatique - IUT du Havre<br>
+                    Projet UmbraTemporis - 23 février 2025
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
