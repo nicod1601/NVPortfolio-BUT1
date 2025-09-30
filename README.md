@@ -3,7 +3,7 @@
 Bienvenue sur mon **portfolio** réalisé uniquement en **HTML** et **CSS**.
 Ce projet présente mon parcours, mes compétences et quelques réalisations en tant qu’étudiant en **BUT Informatique au Havre**.
 
-**lien du site :**https://nvportfolio-but1-info.netlify.app/
+**lien du site :** https://nvportfolio-but1-info.netlify.app/
 
 ---
 
